@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Results</title>
+</head>
+<body>
+
+    <div class="container mx-auto p-4 bg-slate-50" >
+      
+      <div class="flex justify-between items-center mb-4">
+        <!-- Student Photo -->
+        <div class="w-1/3 flex-shrink-0">
+          <img class="rounded-full w-32 h-32" [src]="studentData.student_photo" alt="Student Photo">
+        </div>
+        <!-- Exam Name -->
+        
+        <div class="w-1/3 text-right">
+          <div class="flex items-center justify-end space-x-2 border border-black p-2 rounded-lg">
+            <h2 class="text-gray-600">Exam Name:</h2>
+            <h2 class="text-xl font-semibold">{{ studentData.exam_name }}</h2>
+          </div>
+        </div>
+      </div>
+    
+      <div class="flex justify-center items-center space-x-16 mb-8">
+        <div class="flex items-center space-x-4">
+          <h1 class="text-gray-600">Name:</h1>
+          <h1 class="text-xl font-semibold">{{ studentData.student_name }}</h1>
+        </div>
+        <div class="h-6 border-l border-slate-950"></div>
+        <!-- Student Admission Number -->
+        <div class="flex items-center space-x-4">
+          <p class="text-gray-600">Admission Number:</p>
+          <p class="text-xl font-semibold">{{ studentData.student_admission_number }}</p>
+        </div>
+        <div class="h-6 border-l border-slate-950"></div>
+        <!-- Class Name -->
+        <div class="flex items-center space-x-4">
+          <p class="text-gray-600">Class:</p>
+          <p class="text-xl font-semibold">{{ studentData.class_name }}</p>
+        </div>
+      </div>
+      
+     
+    
+      <div class="subject-results mt-8">
+        <h2 class="text-2xl font-bold text-center">SUBJECT RESULTS</h2>
+        <table class="min-w-full divide-y divide-gray-200 mt-4 border border-gray-300 p-2 rounded-lg">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-extrabold text-gray-500 uppercase tracking-wider">Subject</th>
+              <th class="px-6 py-3 text-left text-xs font-extrabold text-gray-500 uppercase tracking-wider">Grade</th>
+              <th class="px-6 py-3 text-left text-xs font-extrabold text-gray-500 uppercase tracking-wider">Score</th>
+              <th class="px-6 py-3 text-left text-xs font-extrabold text-gray-500 uppercase tracking-wider">Deviation</th>
+              <th class="px-6 py-3 text-left text-xs font-extrabold text-gray-500 uppercase tracking-wider">Rank</th>
+              <th class="px-6 py-3 text-left text-xs font-extrabold text-gray-500 uppercase tracking-wider">Comment</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let subject of studentData.subject_results">
+              <td class="px-6 py-4 whitespace-nowrap">{{ subject.subject_name }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ subject.grade }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ subject.score }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ subject.deviation }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">{{ subject.rank }}/{{subject.rank_out_of}}</td>
+              <td class="px-6 py-4 font-semibold whitespace-nowrap">{{ subject.comment }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+       
+      <div class="border border-black p-4 rounded-lg my-8">
+        <div class="flex justify-around items-center space-x-8">
+          <!-- Mean Marks and Mean Grade -->
+          <div class="flex flex-col items-center space-x-2">
+            <div class="flex items-center space-x-2">
+              <p class="text-gray-600">Mean Marks:</p>
+              <p class="text-xl font-semibold">{{ studentData.mean_marks.avg_score }}</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <p class="text-gray-600">Mean Grade:</p>
+              <p class="text-xl font-semibold">{{ studentData.mean_grade }}</p>
+            </div>
+          </div>
+          <div class="h-16 border-l border-slate-950"></div>
+          <!-- Stream Position and Deviation -->
+          <div class="flex flex-col items-center space-x-2">
+            <div class="flex items-center space-x-2">
+              <p class="text-gray-600">Stream Position:</p>
+              <p class="text-xl font-semibold">{{ studentData.stream_position.position }} / {{ studentData.stream_position.position_out_of }}</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <p class="text-gray-600">Deviation:</p>
+              <p class="text-xl font-semibold">{{ studentData.stream_position.deviation }}</p>
+            </div>
+          </div>
+          <div class="h-16 border-l border-slate-950"></div>
+          <!-- Overall Position and Deviation -->
+          <div class="flex flex-col items-center space-x-2">
+            <div class="flex items-center space-x-2">
+              <p class="text-gray-600">Overall Position:</p>
+              <p class="text-xl font-semibold">{{ studentData.overall_position.position }} / {{ studentData.overall_position.position_out_of }}</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <p class="text-gray-600">Deviation:</p>
+              <p class="text-xl font-semibold">{{ studentData.overall_position.deviation }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="remarks mt-8 space-y-8">
+        <!-- Class Teacher's Remarks -->
+        <div class="relative border border-slate-950 rounded-lg p-4">
+          <h2 class="absolute -top-4 left-4 bg-white px-2 text-xl font-semibold">Class Teacher's Remarks</h2>
+          <p class="text-gray-700 mt-6">{{ studentData.class_teachers_remarks }}</p>
+        </div>
+
+        <!-- Principal's Remarks -->
+        <div class="relative border border-slate-950 rounded-lg p-4 mb-8">
+          <h2 class="absolute -top-4 left-4 bg-white px-2 text-xl font-semibold">Principal's Remarks</h2>
+          <p class="text-gray-700 mt-6">{{ studentData.principals_remarks }}</p>
+        </div>
+    
+      </div>
+    
+    
+      <div class="performance-over-time mt-8">
+        <h2 class="text-2xl font-bold text-center mb-8">PERFORMACE OVER TIME</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <!-- Term 1 -->
+          <div class="flex flex-col space-y-4">
+            <div class="bg-white shadow-lg rounded-lg p-4">
+              <h3 class="text-lg font-medium text-gray-900">{{ studentData.student_performance_over_time[0].exam_name }}</h3>
+              <p class="text-xl text-gray-500">{{ studentData.student_performance_over_time[0].avg_score }}</p>
+            </div>
+            <div class="bg-white shadow-lg rounded-lg p-4">
+              <h3 class="text-lg font-medium text-gray-900">{{ studentData.student_performance_over_time[1].exam_name }}</h3>
+              <p class="text-xl text-gray-500">{{ studentData.student_performance_over_time[1].avg_score }}</p>
+            </div>
+          </div>
+          <!-- Term 2 -->
+          <div class="flex flex-col space-y-4">
+            <div class="bg-white shadow-lg rounded-lg p-4">
+              <h3 class="text-lg font-medium text-gray-900">{{ studentData.student_performance_over_time[2].exam_name }}</h3>
+              <p class="text-xl text-gray-500">{{ studentData.student_performance_over_time[2].avg_score }}</p>
+            </div>
+            <div class="bg-white shadow-lg rounded-lg p-4">
+              <h3 class="text-lg font-medium text-gray-900">{{ studentData.student_performance_over_time[3].exam_name }}</h3>
+              <p class="text-xl text-gray-500">{{ studentData.student_performance_over_time[3].avg_score }}</p>
+            </div>
+          </div>
+          <!-- Term 3 -->
+          <div class="flex flex-col space-y-4">
+            <div class="bg-white shadow-lg rounded-lg p-4">
+              <h3 class="text-lg font-medium text-gray-900">{{ studentData.student_performance_over_time[4].exam_name }}</h3>
+              <p class="text-xl text-gray-500">{{ studentData.student_performance_over_time[4].avg_score }}</p>
+            </div>
+            <div class="bg-white shadow-lg rounded-lg p-4">
+              <h3 class="text-lg font-medium text-gray-900">{{ studentData.student_performance_over_time[5].exam_name }}</h3>
+              <p class="text-xl text-gray-500">{{ studentData.student_performance_over_time[5].avg_score }}</p>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+</body>
+</html>
