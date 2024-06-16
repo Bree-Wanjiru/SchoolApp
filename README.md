@@ -1,6 +1,7 @@
 # SchoolApp
   
-1.  Clone the project 
+1.  Clone the project
+    https://github.com/Bree-Wanjiru/SchoolApp.git
 
 2. Install latest node js
     [link](https://nodejs.org/en/download/package-manager)
